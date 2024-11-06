@@ -1,0 +1,26 @@
+<!-- templates/display_data.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Latest JSON Data</title>
+</head>
+<body>
+<h1>Latest JSON Data</h1>
+<pre id="data-display"></pre>
+
+<script>
+        const socket = new WebSocket('ws://' + window.location.host + '/ws/data/');
+
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            document.getElementById('data-display').textContent = JSON.stringify(data, null, 2);
+        };
+
+        socket.onclose = function(event) {
+            console.error('WebSocket closed:', event);
+        };
+    </script>
+</body>
+</html>
