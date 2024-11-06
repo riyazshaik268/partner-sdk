@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Partner Data</title>
+</head>
+<body>
+    <h2>Submit Partner Data</h2>
+    <form method="POST" action="{% url 'submit_partner_data' %}">
+        {% csrf_token %}
+        <label for="partnerData">Partner Data:</label><br>
+        <textarea id="partnerData" name="partnerData" rows="6" cols="50" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

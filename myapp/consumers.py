@@ -13,6 +13,7 @@ class DataConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
+        print(f"reeceiving data: {data}")
         # Here you could process incoming data if needed
         await self.channel_layer.group_send(
             "data_updates",
@@ -24,4 +25,5 @@ class DataConsumer(AsyncWebsocketConsumer):
 
     async def send_data(self, event):
         data = event["data"]
+        print(f"sending data: {data}")
         await self.send(text_data=json.dumps(data))

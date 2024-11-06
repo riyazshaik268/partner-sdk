@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Partner Data</title>
+    <style>
+        /* Simple toast styling */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1;
+        }
+        #toast.success { background-color: #4CAF50; }  /* Green for success */
+        #toast.error { background-color: #f44336; }    /* Red for error */
+    </style>
+</head>
+<body>
+    <h2>Submit JSON Partner Data</h2>
+    <form id="dataForm" method="POST">
+        {% csrf_token %}
+        <label for="partnerData">Partner Data (JSON only):</label><br>
+        <textarea id="partnerData" name="partnerData" rows="6" cols="50" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Toast element -->
+    {% if message %}
+    <div id="toast" class="{{ message_type }}">{{ message }}</div>
+    <script>
+        // Show the toast when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const toast = document.getElementById('toast');
+            toast.style.visibility = 'visible';
+            setTimeout(() => {
+                toast.style.visibility = 'hidden';
+            }, 3000);  // Hide the toast after 3 seconds
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

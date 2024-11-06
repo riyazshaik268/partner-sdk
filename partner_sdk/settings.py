@@ -94,7 +94,7 @@ DATABASES = {
 ASGI_APPLICATION = 'partner_sdk.asgi.application'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8010",  # Adjust to your frontend's domain if needed
+    "http://localhost:8001",  # Adjust to your frontend's domain if needed
 ]
 
 # Password validation
