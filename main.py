@@ -8,7 +8,7 @@ import json
 
 # Press <no shortcut> to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-GOOGLE_API_KEY = '<redacted>'
+GOOGLE_API_KEY = 'AIzaSyBykeoHrov-BXesnFR0Bvo67r_8nqgq4U0'
 
 genai.configure(api_key=GOOGLE_API_KEY)
 
@@ -540,11 +540,14 @@ SAMPLE_ACCOUNT_DATA = """
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-flash",
+        generation_config={"response_mime_type": "application/json"}
+    )
 
     prompt = """
     Extract values from the following object using the following object metadata and produce
-    in a json format.
+    in a json format. Only output the json object.
     object_to_extract:{object_to_extract}
     object_metadata:{object_metadata}
     """
@@ -556,7 +559,8 @@ if __name__ == '__main__':
             object_to_extract=sample_account_data_json,
             object_metadata=sixsense_acccount_schema
         ))
-        print(extract_result)
+        json_response = extract_result.candidates[0].content.parts[0].text
+        print(json_response)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
